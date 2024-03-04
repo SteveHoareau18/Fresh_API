@@ -27,7 +27,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/user/list")
+    @GetMapping("/users")
     public List<User> list() {
         return StreamSupport.stream(userRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
