@@ -57,16 +57,17 @@ set ERROR_CODE=0
 @setlocal
 
 @REM ==== START VALIDATION ====
-if not "%JAVA_HOME%" == "" goto OkJHome
+@REM if not "%JAVA_HOME%" == "" goto OkJHome
 
-echo.
-echo Error: JAVA_HOME not found in your environment. >&2
-echo Please set the JAVA_HOME variable in your environment to match the >&2
-echo location of your Java installation. >&2
-echo.
-goto error
+@REM echo.
+@REM echo Error: JAVA_HOME not found in your environment. >&2
+@REM echo Please set the JAVA_HOME variable in your environment to match the >&2
+@REM echo location of your Java installation. >&2
+@REM echo.
+@REM goto error
 
-:OkJHome
+@REM :OkJHome
+SET "JAVA_HOME=C:\Users\shoareau.cda\scoop\apps\openjdk17\17.0.2-8"
 if exist "%JAVA_HOME%\bin\java.exe" goto init
 
 echo.
