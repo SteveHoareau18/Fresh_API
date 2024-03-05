@@ -1,68 +1,28 @@
 package fr.steve.fresh_api.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.steve.fresh_api.model.entity.User;
-import fr.steve.fresh_api.exception.UserNotFoundException;
-import fr.steve.fresh_api.model.repository.UserRepository;
-import jakarta.transaction.Transactional;
+import fr.steve.fresh_api.service.UserService;
+import lombok.AllArgsConstructor;
 
 @RestController
+@AllArgsConstructor
 public class UserController {
 
-    private UserRepository userRepository;
-
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserService userService;
 
     @GetMapping("/users")
-    public List<User> list() {
-        return StreamSupport.stream(userRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+    public ResponseEntity<Iterable<User>> list() {
+        return ResponseEntity.ok(this.userService.getAll());
     }
 
-    @PostMapping("/user/create")
-    public User create(@RequestBody @NonNull User user) {
-        userRepository.save(user);
-        return user;
-    }
-
-    @GetMapping("/user/get/{id}")
-    public User get(@PathVariable(value = "id") @NonNull Integer id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-    }
-
-    @PutMapping("/user/update/{id}")
-    @Transactional
-    public User update(@RequestBody @NonNull User user, @PathVariable(value = "id") @NonNull Integer id) {
-        User userDb = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        if (user.getBornDate() != null)
-            userDb.setBornDate(user.getBornDate());
-        if (user.getFirstName() != null)
-            userDb.setFirstName(user.getFirstName());
-        if (user.getName() != null)
-            userDb.setName(user.getName());
-        if (userDb != null)
-            this.userRepository.save(userDb);
-        return userDb;
-    }
-
-    @DeleteMapping("/user/delete/{id}")
-    public String delete(@PathVariable(value = "id") @NonNull Integer id) {
-        User userDb = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        userRepository.delete(userDb);
-        return "L'utilisateur ayant l'id: " + id + ", a bien été supprimé.";
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> get(@PathVariable(value = "id") @NonNull Long id) {
+        return ResponseEntity.ok(this.userService.get(id));
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import fr.steve.fresh_api.dto.CreateUserDto;
 import fr.steve.fresh_api.exception.UserAlreadyExistsException;
+import fr.steve.fresh_api.exception.UserNotFoundException;
 import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.model.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private UserRepository repository;
+    private final UserRepository repository;
 
     public Iterable<User> getAll() {
         return this.repository.findAll();
@@ -35,13 +36,23 @@ public class UserService implements UserDetailsService {
         return this.repository.save(user);
     }
 
+    public User get(Long id) {
+        return this.repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    }
+
+    public void delete(Long id) {
+        this.repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        this.repository.deleteById(id);
+    }
+
     public User save(User user) {
         return this.repository.save(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.repository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Vous n'êtes pas enregistré."));
+        return this.repository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Vous n'êtes pas enregistré."));
     }
 
 }
