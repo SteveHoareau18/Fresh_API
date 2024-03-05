@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.steve.fresh_api.exception.ProductNotFoundException;
 import fr.steve.fresh_api.model.entity.Product;
-import fr.steve.fresh_api.model.entity.User;
+
 import fr.steve.fresh_api.model.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 
@@ -49,7 +49,7 @@ public class ProductController {
 
     @PutMapping("/product/update/{id}")
     @Transactional
-    public Product update(@RequestBody @NonNull User product, @PathVariable(value = "id") @NonNull Integer id) {
+    public Product update(@RequestBody @NonNull Product product, @PathVariable(value = "id") @NonNull Integer id) {
         Product productDb = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         
         
