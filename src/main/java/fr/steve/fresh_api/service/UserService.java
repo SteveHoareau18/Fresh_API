@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fr.steve.fresh_api.dto.CreateUserDto;
 import fr.steve.fresh_api.exception.UserAlreadyExistsException;
 import fr.steve.fresh_api.exception.UserNotFoundException;
 import fr.steve.fresh_api.model.entity.User;
@@ -22,17 +21,11 @@ public class UserService implements UserDetailsService {
         return this.repository.findAll();
     }
 
-    public User create(CreateUserDto dto) {
-        if (this.repository.existsByEmail(dto.getEmail())) {
-            throw new UserAlreadyExistsException(dto.getEmail());
+    public User create(User user) {
+        if (this.repository.existsByEmail(user.getEmail())) {
+            throw new UserAlreadyExistsException(user.getEmail());
         }
 
-        User user = User.builder()
-                .firstname(dto.getFirstname())
-                .name(dto.getName())
-                .email(dto.getEmail())
-                .password(dto.getPassword())
-                .build();
         return this.repository.save(user);
     }
 

@@ -1,6 +1,7 @@
 package fr.steve.fresh_api.controller;
 
 import java.time.Instant;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.steve.fresh_api.dto.CreateUserDto;
 import fr.steve.fresh_api.dto.LoginDto;
 import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -41,13 +42,13 @@ public class AuthController {
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
     @PostMapping("auth/register")
-    public ResponseEntity<User> register(@RequestBody CreateUserDto dto) {
-        dto.setPassword(this.passwordEncoder.encode(dto.getPassword()));
-        return ResponseEntity.ok(this.userService.create(dto));
+    public ResponseEntity<User> register(@Valid @RequestBody User user) {
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        return ResponseEntity.ok(this.userService.create(user));
     }
 
     @PostMapping("auth/login")
-    public ResponseEntity<Void> login(@RequestBody LoginDto dto, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginDto dto, HttpServletRequest request, HttpServletResponse response) {
         UsernamePasswordAuthenticationToken token = UsernamePasswordAuthenticationToken.unauthenticated(
                 dto.getEmail(), dto.getPassword());
         Authentication authentication = authManager.authenticate(token);
@@ -59,7 +60,7 @@ public class AuthController {
         securityContextHolderStrategy.setContext(context);
         securityContextRepository.saveContext(context, request, response);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(Map.of("message", "Vous êtes connecté."));
     }
     
     @GetMapping("auth/me")
