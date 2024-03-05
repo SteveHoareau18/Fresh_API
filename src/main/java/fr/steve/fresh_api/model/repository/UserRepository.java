@@ -1,10 +1,10 @@
-package fr.steve.fresh_api.repository;
+package fr.steve.fresh_api.model.repository;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import fr.steve.fresh_api.entity.User;
+import fr.steve.fresh_api.model.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 

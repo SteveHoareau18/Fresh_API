@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.steve.fresh_api.entity.User;
+import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.exception.UserNotFoundException;
-import fr.steve.fresh_api.repository.UserRepository;
+import fr.steve.fresh_api.model.repository.UserRepository;
 import jakarta.transaction.Transactional;
 
 @RestController
@@ -48,8 +48,6 @@ public class UserController {
     @Transactional
     public User update(@RequestBody @NonNull User user, @PathVariable(value = "id") @NonNull Integer id) {
         User userDb = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        if (user.getAddress() != null)
-            userDb.setAddress(user.getAddress());
         if (user.getBornDate() != null)
             userDb.setBornDate(user.getBornDate());
         if (user.getFirstName() != null)
@@ -61,7 +59,6 @@ public class UserController {
         return userDb;
     }
 
-    @SuppressWarnings("null")
     @DeleteMapping("/user/delete/{id}")
     public String delete(@PathVariable(value = "id") @NonNull Integer id) {
         User userDb = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));

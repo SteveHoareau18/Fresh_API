@@ -1,13 +1,11 @@
-package fr.steve.fresh_api.entity;
+package fr.steve.fresh_api.model.entity;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -17,8 +15,6 @@ public class User {
     private Integer id;
     private String name, firstName;
     private LocalDate bornDate;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Address address;
 
     public Integer getId() {
         return this.id;
@@ -46,13 +42,5 @@ public class User {
 
     public void setBornDate(LocalDate bornDate) {
         this.bornDate = bornDate;
-    }
-
-    public Address getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }
