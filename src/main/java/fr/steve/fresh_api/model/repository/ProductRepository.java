@@ -8,4 +8,4 @@ import fr.steve.fresh_api.model.entity.Product;
 
 public interface ProductRepository extends CrudRepository<Product, Integer> {
 
-    List<Product> findByName(String Name);}
+    List<Product> findByName(String name);}
