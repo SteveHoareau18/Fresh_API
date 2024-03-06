@@ -29,6 +29,16 @@ public class UserService implements UserDetailsService {
         return this.repository.save(user);
     }
 
+    public User update(Long id, User user) {
+        User target = this.repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        target.setFirstname(user.getFirstname());
+        target.setName(user.getName());
+        target.setEmail(user.getEmail());
+        target.setRole(user.getRole());
+
+        return this.repository.save(target);
+    }
+
     public User get(Long id) {
         return this.repository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
