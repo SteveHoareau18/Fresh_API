@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/auth/register", "auth/login").permitAll()
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
-                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.NEVER))
+                .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .logout((logout) -> logout.logoutUrl("/auth/logout")
                         .addLogoutHandler(new SecurityContextLogoutHandler())
                         .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.NO_CONTENT)));
