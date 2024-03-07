@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,16 +75,16 @@ public class CourseController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/course/{id}/product/{productId}")
+    @PostMapping({"/course/{id}/product","/course/{id}/product/{productId}"})
     public CourseProduct addProduct(
-            @PathVariable("id") @NonNull Integer id,
-            @PathVariable("productId") @NonNull Integer productId,
-            @RequestBody @NonNull CreateCourseProductDto dto) {
+            @PathVariable(name = "id") Integer id,
+            @PathVariable(name = "productId", required = false) Integer productId,
+            @RequestBody CreateCourseProductDto dto) {
         Course course = this.courseService.get(id);
         Product product;
         try{
             product = this.productService.get(productId);
-        }catch(ProductNotFoundException e){
+        }catch(Exception e){
             product = new Product();
             product.setName(dto.getProduct().getName());
             this.productService.save(product);
