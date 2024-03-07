@@ -2,12 +2,15 @@ package fr.steve.fresh_api.service;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import fr.steve.fresh_api.enums.Role;
 import fr.steve.fresh_api.exception.ProductNotFoundException;
 import fr.steve.fresh_api.model.dto.product.CreateProductDto;
 import fr.steve.fresh_api.model.dto.product.UpdateProductDto;
 import fr.steve.fresh_api.model.entity.Product;
+import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.model.repository.ProductRepository;
 import fr.steve.fresh_api.util.ListUtils;
 import lombok.AllArgsConstructor;
@@ -30,10 +33,11 @@ public class ProductService {
         return this.repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
-    public Product create(CreateProductDto dto) {
+    public Product create(CreateProductDto dto, User user) {
         Product product = Product.builder()
                 .name(dto.getName())
-                .build();
+                .owner(user == null || user.getRole()==Role.ADMIN?null:user)
+                .build();        
         return this.repository.save(product);
     }
 
