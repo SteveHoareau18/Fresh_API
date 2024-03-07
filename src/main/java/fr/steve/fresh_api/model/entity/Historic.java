@@ -38,11 +38,11 @@ public class Historic {
         this.status = status;
     }
 
-    public LocalDateTime getStatus_date() {
+    public LocalDateTime getStatusDate() {
         return this.status_date;
     }
 
-    public void setStatus_date(LocalDateTime status_date) {
+    public void setStatusDate(LocalDateTime status_date) {
         this.status_date = status_date;
     }
 }
