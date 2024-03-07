@@ -2,7 +2,11 @@ package fr.steve.fresh_api.model.entity;
 
 import java.time.LocalDateTime;
 
+
+import fr.steve.fresh_api.enums.Status;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,19 +27,15 @@ public class Historic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String status;
     private LocalDateTime status_date;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.CREATED;
+  
 
     public Integer getId() {
         return this.id;
-    }
-
-    public String getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public LocalDateTime getStatusDate() {
@@ -45,5 +45,7 @@ public class Historic {
     public void setStatusDate(LocalDateTime status_date) {
         this.status_date = status_date;
     }
+
+    
 }
 
