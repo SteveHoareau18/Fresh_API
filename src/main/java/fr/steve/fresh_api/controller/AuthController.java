@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.steve.fresh_api.dto.CreateUserDto;
 import fr.steve.fresh_api.dto.LoginDto;
 import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.service.UserService;
@@ -42,9 +43,9 @@ public class AuthController {
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
     @PostMapping("auth/register")
-    public ResponseEntity<User> register(@Valid @RequestBody User user) {
-        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-        return ResponseEntity.ok(this.userService.create(user));
+    public ResponseEntity<User> register(@Valid @RequestBody CreateUserDto dto) {
+        dto.setPassword(this.passwordEncoder.encode(dto.getPassword()));
+        return ResponseEntity.ok(this.userService.create(dto));
     }
 
     @PostMapping("auth/login")
