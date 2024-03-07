@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>fr.steve</groupId>
 	<artifactId>fresh_api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<name>fresh_api</name>
 	<description>API for Fresh APP</description>
 	<properties>
