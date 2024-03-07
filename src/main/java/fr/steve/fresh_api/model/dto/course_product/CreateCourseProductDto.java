@@ -1,5 +1,6 @@
 package fr.steve.fresh_api.model.dto.course_product;
 
+import fr.steve.fresh_api.model.dto.product.CreateProductDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
