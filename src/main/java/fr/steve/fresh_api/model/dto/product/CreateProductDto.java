@@ -1,4 +1,4 @@
-package fr.steve.fresh_api.dto;
+package fr.steve.fresh_api.model.dto.product;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,10 +12,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCourseDto {
+public class CreateProductDto {
 
     @NotNull
     @NotBlank
     @Size(max = 50)
-    private String title;
+    private String name;
 }

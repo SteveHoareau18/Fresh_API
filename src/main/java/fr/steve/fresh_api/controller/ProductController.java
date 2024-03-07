@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.steve.fresh_api.dto.CreateProductDto;
-import fr.steve.fresh_api.dto.UpdateProductDto;
+import fr.steve.fresh_api.model.dto.product.CreateProductDto;
+import fr.steve.fresh_api.model.dto.product.UpdateProductDto;
 import fr.steve.fresh_api.model.entity.Product;
 
 import fr.steve.fresh_api.service.ProductService;

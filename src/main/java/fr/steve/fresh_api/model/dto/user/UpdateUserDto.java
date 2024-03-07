@@ -1,4 +1,4 @@
-package fr.steve.fresh_api.dto;
+package fr.steve.fresh_api.model.dto.user;
 
 import fr.steve.fresh_api.enums.Role;
 import jakarta.validation.constraints.Email;

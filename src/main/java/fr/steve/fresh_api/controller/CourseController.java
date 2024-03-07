@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.steve.fresh_api.dto.CreateCourseDto;
-import fr.steve.fresh_api.dto.CreateCourseProductDto;
-import fr.steve.fresh_api.dto.UpdateCourseDto;
-import fr.steve.fresh_api.dto.UpdateCourseProductDto;
+import fr.steve.fresh_api.model.dto.course.CreateCourseDto;
+import fr.steve.fresh_api.model.dto.course.UpdateCourseDto;
+import fr.steve.fresh_api.model.dto.course_product.CreateCourseProductDto;
+import fr.steve.fresh_api.model.dto.course_product.UpdateCourseProductDto;
 import fr.steve.fresh_api.model.entity.Course;
 import fr.steve.fresh_api.model.entity.CourseProduct;
 import fr.steve.fresh_api.model.entity.Product;

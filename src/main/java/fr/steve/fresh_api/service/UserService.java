@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import fr.steve.fresh_api.dto.CreateUserDto;
-import fr.steve.fresh_api.dto.UpdateUserDto;
 import fr.steve.fresh_api.enums.Role;
 import fr.steve.fresh_api.exception.UserAlreadyExistsException;
 import fr.steve.fresh_api.exception.UserNotFoundException;
+import fr.steve.fresh_api.model.dto.user.CreateUserDto;
+import fr.steve.fresh_api.model.dto.user.UpdateUserDto;
 import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.model.repository.UserRepository;
 import fr.steve.fresh_api.util.ListUtils;
