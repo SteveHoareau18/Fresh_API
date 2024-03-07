@@ -21,14 +21,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Product {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    @CreatedBy
     @ManyToOne(optional = true)
     private User owner;
     

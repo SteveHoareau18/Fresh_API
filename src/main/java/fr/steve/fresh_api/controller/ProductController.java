@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.steve.fresh_api.model.dto.product.CreateProductDto;
 import fr.steve.fresh_api.model.dto.product.UpdateProductDto;
 import fr.steve.fresh_api.model.entity.Product;
-
+import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.service.ProductService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -34,8 +35,9 @@ public class ProductController {
     }
 
     @PostMapping("/product/create")
-    public ResponseEntity<Product> create(@Valid @RequestBody @NonNull CreateProductDto dto) {
-        Product product = this.productService.create(dto);
+    public ResponseEntity<Product> create(@Valid @RequestBody @NonNull CreateProductDto dto,Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        Product product = this.productService.create(dto, user);
         return ResponseEntity.ok(product);
     }
 
