@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import fr.steve.fresh_api.dto.CreateProductDto;
-import fr.steve.fresh_api.dto.UpdateProductDto;
 import fr.steve.fresh_api.exception.ProductNotFoundException;
+import fr.steve.fresh_api.model.dto.product.CreateProductDto;
+import fr.steve.fresh_api.model.dto.product.UpdateProductDto;
 import fr.steve.fresh_api.model.entity.Product;
 import fr.steve.fresh_api.model.repository.ProductRepository;
 import fr.steve.fresh_api.util.ListUtils;

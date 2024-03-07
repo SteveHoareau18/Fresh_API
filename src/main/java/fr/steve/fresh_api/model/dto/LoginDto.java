@@ -1,4 +1,4 @@
-package fr.steve.fresh_api.dto;
+package fr.steve.fresh_api.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

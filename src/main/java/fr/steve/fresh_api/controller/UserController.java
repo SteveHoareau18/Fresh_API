@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import fr.steve.fresh_api.dto.UpdateUserDto;
+import fr.steve.fresh_api.model.dto.user.UpdateUserDto;
 import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.service.UserService;
 import jakarta.validation.Valid;

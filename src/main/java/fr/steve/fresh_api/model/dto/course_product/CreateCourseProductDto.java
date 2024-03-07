@@ -1,4 +1,4 @@
-package fr.steve.fresh_api.dto;
+package fr.steve.fresh_api.model.dto.course_product;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

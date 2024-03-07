@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
-import fr.steve.fresh_api.dto.UpdateCourseProductDto;
 import fr.steve.fresh_api.exception.CourseProductNotFoundException;
+import fr.steve.fresh_api.model.dto.course_product.UpdateCourseProductDto;
 import fr.steve.fresh_api.model.entity.CourseProduct;
 import fr.steve.fresh_api.model.repository.CourseProductRepository;
 import lombok.AllArgsConstructor;

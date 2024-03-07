@@ -1,4 +1,4 @@
-package fr.steve.fresh_api.dto;
+package fr.steve.fresh_api.model.dto.product;
 
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

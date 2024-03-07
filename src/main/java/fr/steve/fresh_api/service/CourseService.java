@@ -6,9 +6,9 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import fr.steve.fresh_api.dto.CreateCourseDto;
-import fr.steve.fresh_api.dto.UpdateCourseDto;
 import fr.steve.fresh_api.exception.CourseNotFoundException;
+import fr.steve.fresh_api.model.dto.course.CreateCourseDto;
+import fr.steve.fresh_api.model.dto.course.UpdateCourseDto;
 import fr.steve.fresh_api.model.entity.Course;
 import fr.steve.fresh_api.model.repository.CourseRepository;
 import fr.steve.fresh_api.util.ListUtils;

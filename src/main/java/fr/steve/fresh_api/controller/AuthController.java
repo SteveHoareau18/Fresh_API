@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.steve.fresh_api.dto.CreateUserDto;
-import fr.steve.fresh_api.dto.LoginDto;
+import fr.steve.fresh_api.model.dto.LoginDto;
+import fr.steve.fresh_api.model.dto.user.CreateUserDto;
 import fr.steve.fresh_api.model.entity.User;
 import fr.steve.fresh_api.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;

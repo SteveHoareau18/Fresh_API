@@ -1,4 +1,4 @@
-package fr.steve.fresh_api.dto;
+package fr.steve.fresh_api.model.dto.course;
 
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateCourseProductDto {
+public class UpdateCourseDto {
 
     @Size(max = 50)
-    private String commentary;
+    private String title;
 }
