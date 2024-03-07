@@ -1,10 +1,6 @@
 package fr.steve.fresh_api.service;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import fr.steve.fresh_api.enums.Role;
