@@ -32,7 +32,7 @@ public class Historic {
     private Integer id;
     private LocalDateTime status_date;
 
-    @OneToMany
+    @ManyToOne
     private CourseProduct courseProduct;
 
     @ManyToOne
