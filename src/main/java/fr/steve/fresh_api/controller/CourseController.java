@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.steve.fresh_api.exception.ProductNotFoundException;
 import fr.steve.fresh_api.model.dto.course.CreateCourseDto;
 import fr.steve.fresh_api.model.dto.course.UpdateCourseDto;
 import fr.steve.fresh_api.model.dto.course_product.CreateCourseProductDto;
@@ -79,7 +80,14 @@ public class CourseController {
             @PathVariable("productId") @NonNull Integer productId,
             @RequestBody @NonNull CreateCourseProductDto dto) {
         Course course = this.courseService.get(id);
-        Product product = this.productService.get(productId);
+        Product product;
+        try{
+            product = this.productService.get(productId);
+        }catch(ProductNotFoundException e){
+            product = new Product();
+            product.setName(dto.getProduct().getName());
+            this.productService.save(product);
+        }
 
         CourseProduct courseProduct = CourseProduct.builder()
                 .course(course)

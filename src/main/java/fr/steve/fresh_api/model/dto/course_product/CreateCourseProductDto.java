@@ -18,4 +18,6 @@ public class CreateCourseProductDto {
     private String commentary;
 
     private boolean taken = false;
+
+    private CreateProductDto product;
 }
