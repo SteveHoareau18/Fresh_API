@@ -1,5 +1,7 @@
 package fr.steve.fresh_api.service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,10 @@ public class ProductService {
 
     public List<Product> getAll() {
         return ListUtils.iteratorToList(this.repository.findAll());
+    }
+
+    public List<Product> getAll(User user) {
+        return ListUtils.iteratorToList(this.repository.findAllByOwnerOrOwnerNull(user));
     }
 
     public Product save(Product product) {
