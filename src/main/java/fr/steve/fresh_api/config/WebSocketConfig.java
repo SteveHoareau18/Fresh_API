@@ -9,6 +9,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
+@Deprecated
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
   @Override

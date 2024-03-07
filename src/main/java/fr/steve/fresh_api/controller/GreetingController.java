@@ -9,6 +9,7 @@ import fr.steve.fresh_api.model.entity.Greeting;
 import fr.steve.fresh_api.model.entity.HelloMessage;
 
 @Controller
+@Deprecated
 public class GreetingController {
 
 
