@@ -1,5 +1,6 @@
 package fr.steve.fresh_api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import fr.steve.fresh_api.enums.Role;
 import fr.steve.fresh_api.model.dto.product.CreateProductDto;
 import fr.steve.fresh_api.model.dto.product.UpdateProductDto;
 import fr.steve.fresh_api.model.entity.Product;
@@ -29,9 +31,11 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> list() {
-        List<Product> products = this.productService.getAll();
-        return ResponseEntity.ok(products);
+    public ResponseEntity<List<Product>> list(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return user.getRole() == Role.ADMIN 
+            ? ResponseEntity.ok(this.productService.getAll())
+            : ResponseEntity.ok(this.productService.getAll(user));
     }
 
     @PostMapping("/product/create")
