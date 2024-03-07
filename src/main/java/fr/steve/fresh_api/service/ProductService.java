@@ -33,7 +33,6 @@ public class ProductService {
     public Product create(CreateProductDto dto) {
         Product product = Product.builder()
                 .name(dto.getName())
-                .owner
                 .build();
         return this.repository.save(product);
     }
