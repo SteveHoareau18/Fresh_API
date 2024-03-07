@@ -1,5 +1,6 @@
 package fr.steve.fresh_api.model.entity;
 
+@Deprecated
 public class HelloMessage {
 
     private String name;

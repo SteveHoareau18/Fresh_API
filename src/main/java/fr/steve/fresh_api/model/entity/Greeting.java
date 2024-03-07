@@ -1,6 +1,6 @@
 package fr.steve.fresh_api.model.entity;
 
-
+@Deprecated
 public class Greeting {
 
   private String content;
