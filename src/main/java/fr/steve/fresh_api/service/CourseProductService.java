@@ -24,8 +24,7 @@ public class CourseProductService {
         return this.repository.findById(id).orElseThrow(() -> new CourseProductNotFoundException(id));
     }
 
-    public CourseProduct update(Integer id, UpdateCourseProductDto dto) {
-        CourseProduct target = this.repository.findById(id).orElseThrow(() -> new CourseProductNotFoundException(id));
+    public CourseProduct update(CourseProduct target, UpdateCourseProductDto dto) {
         if (target.isTaken()) {
             return target;
         }
@@ -42,6 +41,7 @@ public class CourseProductService {
         if (dto.getCommentary() != null) {
             target.setCommentary(dto.getCommentary());
         }
+
         return this.repository.save(target);
     }
 

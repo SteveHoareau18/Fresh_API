@@ -20,5 +20,6 @@ public class UpdateCourseProductDto {
     private String commentary;
     @JsonProperty("product_id")
     private Integer productId;
+    private Long userId;
     private CreateProductDto product;
 }

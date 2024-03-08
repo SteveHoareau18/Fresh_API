@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.steve.fresh_api.enums.Role;
 import fr.steve.fresh_api.model.dto.course.CreateCourseDto;
 import fr.steve.fresh_api.model.dto.course.UpdateCourseDto;
 import fr.steve.fresh_api.model.dto.course_product.CreateCourseProductDto;
@@ -155,11 +154,8 @@ public class CourseController {
         Product product;
         try {
             product = this.productService.get(productId);
-        } catch (Exception e) {
-            product = Product.builder()
-                    .name(dto.getProduct().getName())
-                    .build();
-            this.productService.save(product);
+        }catch(Exception e){
+            product = this.productService.create(dto.getProduct(), user);
         }
 
         CourseProduct courseProduct = CourseProduct.builder()
