@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import fr.steve.fresh_api.enums.Role;
 import fr.steve.fresh_api.model.dto.course.CreateCourseDto;
 import fr.steve.fresh_api.model.dto.course.UpdateCourseDto;
 import fr.steve.fresh_api.model.dto.course_product.CreateCourseProductDto;
@@ -189,6 +191,15 @@ public class CourseController {
             @RequestBody @NonNull UpdateCourseProductDto dto,
             Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+        Product product;
+        try {
+            product = this.productService.get(dto.getProductId());
+        } catch (Exception e) {
+            product = new Product();
+            product.setName(dto.getProduct().getName());
+        }
+        product.setOwner(user == null || user.getRole() == Role.ADMIN ? null : user);
+        this.productService.save(product);
         CourseProduct courseProduct = this.courseProductService.get(id);
         if (!courseProduct.getCourse().canAccess(user)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
