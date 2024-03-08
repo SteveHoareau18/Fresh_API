@@ -99,4 +99,17 @@ public class User implements UserDetails {
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        return this.id.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object user) {
+        if(!(user instanceof User)) {
+            return false;
+        }
+        return this.id.equals(((User) user).getId());
+    }
+
 }
