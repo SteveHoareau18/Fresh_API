@@ -29,8 +29,18 @@ public class CourseProductService {
         if (target.isTaken()) {
             return target;
         }
-        if(dto.getCommentary() != null) {
-            target.setCommentary(dto.getCommentary());;
+        if (dto.getCommentary() != null) {
+            target.setCommentary(dto.getCommentary());
+        }
+        return this.repository.save(target);
+    }
+
+    public CourseProduct update(CourseProduct target, UpdateCourseProductDto dto) {
+        if (target.isTaken()) {
+            return target;
+        }
+        if (dto.getCommentary() != null) {
+            target.setCommentary(dto.getCommentary());
         }
         return this.repository.save(target);
     }
@@ -44,9 +54,24 @@ public class CourseProductService {
         this.repository.delete(courseProduct);
     }
 
+    public void delete(CourseProduct courseProduct) {
+        if (courseProduct.isTaken()) {
+            return;
+        }
+        this.repository.delete(courseProduct);
+    }
+
     public CourseProduct take(Integer id) {
         CourseProduct courseProduct = this.repository.findById(id)
                 .orElseThrow(() -> new CourseProductNotFoundException(id));
+        if (courseProduct.isTaken()) {
+            return courseProduct;
+        }
+        courseProduct.setTakenAt(LocalDateTime.now());
+        return this.repository.save(courseProduct);
+    }
+
+    public CourseProduct take(CourseProduct courseProduct) {
         if (courseProduct.isTaken()) {
             return courseProduct;
         }
