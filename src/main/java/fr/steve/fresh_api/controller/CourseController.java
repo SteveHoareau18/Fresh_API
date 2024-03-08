@@ -188,22 +188,20 @@ public class CourseController {
     @PutMapping("/course-product/{id}")
     public ResponseEntity<CourseProduct> updateProduct(
             @PathVariable("id") @NonNull Integer id,
-            @RequestBody @NonNull UpdateCourseProductDto dto,
-            Authentication authentication) {
+            @RequestBody @NonNull UpdateCourseProductDto dto, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        Product product;
-        try {
-            product = this.productService.get(dto.getProductId());
-        } catch (Exception e) {
-            product = new Product();
-            product.setName(dto.getProduct().getName());
-        }
-        product.setOwner(user == null || user.getRole() == Role.ADMIN ? null : user);
-        this.productService.save(product);
+        
         CourseProduct courseProduct = this.courseProductService.get(id);
         if (!courseProduct.getCourse().canAccess(user)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+        Product product;
+        try {
+            product = this.productService.get(dto.getProductId());
+        } catch (Exception e) {
+            product = this.productService.create(dto.getProduct(), user);
+        }
+        courseProduct.setProduct(product);
         this.courseProductService.update(courseProduct, dto);
         return ResponseEntity.ok(courseProduct);
     }
