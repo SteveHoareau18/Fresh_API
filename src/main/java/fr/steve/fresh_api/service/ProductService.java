@@ -51,6 +51,10 @@ public class ProductService {
         return this.repository.save(target);
     }
 
+    public boolean existById(Integer id){
+        return this.repository.existsById(id);
+    }
+
     public void delete(Integer id) {
         Product product = this.repository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
