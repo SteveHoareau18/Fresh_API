@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -43,12 +44,14 @@ public class AuthController {
     private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
 
     @PostMapping("auth/register")
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     public ResponseEntity<User> register(@Valid @RequestBody CreateUserDto dto) {
         dto.setPassword(this.passwordEncoder.encode(dto.getPassword()));
         return ResponseEntity.ok(this.userService.create(dto));
     }
 
     @PostMapping("auth/login")
+    @PreAuthorize("hasRole('ROLE_ANONYMOUS')")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginDto dto, HttpServletRequest request, HttpServletResponse response) {
         UsernamePasswordAuthenticationToken token = UsernamePasswordAuthenticationToken.unauthenticated(
                 dto.getEmail(), dto.getPassword());
