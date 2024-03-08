@@ -157,7 +157,6 @@ public class CourseController {
         }catch(Exception e){
             product = this.productService.create(dto.getProduct(), user);
         }
-
         CourseProduct courseProduct = CourseProduct.builder()
                 .course(course)
                 .product(product)
